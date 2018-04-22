@@ -11,9 +11,15 @@ import UIKit
 class TodoListViewController: UITableViewController {
 
     var itemArray = ["IOS öğren","Masraf yönetimi çak", "Bussiness model olustur"]
+    let defaults = UserDefaults.standard
+    let arrayName = "todoListArray"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let items = defaults.array(forKey: arrayName) as? [String] {
+            itemArray = items
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -52,9 +58,10 @@ class TodoListViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             // add e basilince burasi calisacak
-                self.itemArray.append(alertTextView.text!)
+            self.itemArray.append(alertTextView.text!)
             self.tableView.reloadData()
-            }
+            self.defaults.set(self.itemArray, forKey: self.arrayName)
+        }
         
         
         alert.addTextField { (alertTextF) in
