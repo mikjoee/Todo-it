@@ -10,7 +10,7 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
 
-    let itemArray = ["IOS öğren","Masraf yönetimi çak", "Bussiness model olustur"]
+    var itemArray = ["IOS öğren","Masraf yönetimi çak", "Bussiness model olustur"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +42,34 @@ class TodoListViewController: UITableViewController {
             tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         }
     }
+    
+    // MARK - Add New Items
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
+        var alertTextView = UITextField()
+        
+        let action = UIAlertAction(title: "Add", style: .default) { (action) in
+            // add e basilince burasi calisacak
+                self.itemArray.append(alertTextView.text!)
+            self.tableView.reloadData()
+            }
+        
+        
+        alert.addTextField { (alertTextF) in
+            alertTextF.placeholder = "Create New Item"
+            alertTextView = alertTextF
+        }
+        
+        alert.addAction(action)
+        
+        
+        present(alert, animated: true, completion: nil)
+
+        
+    }
+    
     
 
 }
