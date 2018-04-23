@@ -45,7 +45,6 @@ class TodoListViewController: UITableViewController {
         itemArray[indexPath.row].done = !item.done
         
         if(itemArray[indexPath.row].done){
-            let oldName = itemArray[indexPath.row].title!
             let dtstr: String = dateStr()
             itemArray[indexPath.row].date = "(\(dtstr))"
         }else{
